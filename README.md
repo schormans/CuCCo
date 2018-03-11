@@ -170,3 +170,4 @@ given input parameters.
 - Non-square PCB coils currently use the gap length formula for square 
 coils; this should be updated. Non-critical, since this only affects SRF 
 calcs.
+- Improve user friendliness; implement GUI when all other functions are in place.
