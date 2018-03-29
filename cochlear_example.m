@@ -136,13 +136,10 @@ vin = sqrt((40e-3*real(Zload))./(abs(vgain).^2));
 
 powerout = ((((abs(vin).^2).*(abs(vgain).^2)))./real(Zload));
 
-%For SS and SP link
-i1 = vin./Zlink;
 
-eff1 = ((abs(i1).^2).*real(Zrefl).*real(Zlink))./(vin.^2);
-eff2 = (abs(vin.*vgain).^2)./((abs(i1).^2).*real(Zload).*real(Zrefl));
+efflink = linkeff('SP',vgain,Zlink,Zload);
 
-efflink = eff1.*eff2;
+
 
 hold on
 yyaxis left
