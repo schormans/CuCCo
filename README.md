@@ -215,8 +215,8 @@ given input parameters.
 ## Features to be Added (TODO)
 
 
-- Proper methods for efficiency calculation, currently this is manual 
-(see `cochlear_example.m`).
+~~- Proper methods for efficiency calculation, currently this is manual 
+(see `cochlear_example.m`).~~
 - Currently coils are assumed to be coaxially aligned, need to add methods for lateral and angular misalignment.
 - For PCB coils, Rs prediction is sensitive to input variables. Ideally need a better approximation.
 - Non-square PCB coils currently use the gap length formula for square 
