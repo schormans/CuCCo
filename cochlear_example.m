@@ -82,10 +82,14 @@ powerout = ((((abs(vin).^2).*(abs(vgain).^2)))./real(Zload));
 %For SS and SP link
 i1 = vin./Zlink;
 
+%Old eff calcs had some errors
+%{
 eff1 = ((abs(i1).^2).*real(Zrefl).*real(Zlink))./(vin.^2);
 eff2 = (abs(vin.*vgain).^2)./((abs(i1).^2).*real(Zload).*real(Zrefl));
+%}
 
-efflink = eff1.*eff2;
+
+efflink = (abs(vgain).^2).*((abs(Zlink).^2.*real(Zload))./((abs(Zload).^2.*real(Zlink))));
 
 figure
 yyaxis left
