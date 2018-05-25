@@ -240,7 +240,7 @@ given input parameters.
 
 ~~- Proper methods for efficiency calculation, currently this is manual 
 (see `cochlear_example.m`).~~
-- Currently coils are assumed to be coaxially aligned, need to add methods for ~~ lateral ~~ and angular misalignment.
+- Currently coils are assumed to be coaxially aligned, need to add methods for ~lateral~ and angular misalignment.
     → *Added mutualLat for lateral misalignment modelling; more complex than mutualIdeal, therefore slower*
 - For PCB coils, Rs prediction is sensitive to input variables. Ideally need a better approximation.
 - Non-square PCB coils currently use the gap length formula for square 
