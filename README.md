@@ -133,6 +133,12 @@ This is a complex number, use `abs(gainout)` to get the absolute value.
 - *effmax*: Maximum theoretical link efficiency, given the values of *Q* and *k*.
 
 
+
+#### `linkcharvslat.m`
+
+Fundamentally the same as `linkcharvsdist.m`, but uses `mutualLat.m` to include
+a lateral misalignment as well as a distance variable.
+
 #### `mutualIdeal.m`
 
 Determines the mutual inductance and coupling factor of two coaxially 
@@ -142,6 +148,23 @@ currently be of the same class.
 *Inputs*
 - *coil1, coil2*: The input coil objects, can be `SolWireCoil` or 
 `PCBCoil`
+- *dist*: The coaxial distance between the two coil objects
+
+*Outputs*
+- *M*: Mutual inductance between the coils
+- *k*: Coupling factor (*M* normalized to geometric mean of the two coil 
+inductances)
+
+#### `mutualLat.m`
+
+Determines the mutual inductance and coupling factor of two parallel coils 
+with a lateral displacement *lat*, separated by a distance *dist*. 
+The two coil objects must currently be of the same class.
+
+*Inputs*
+- *coil1, coil2*: The input coil objects, can be `SolWireCoil` or 
+`PCBCoil`
+- *lat*: The lateral misalignment between the two coil centers.
 - *dist*: The coaxial distance between the two coil objects
 
 *Outputs*
@@ -217,7 +240,8 @@ given input parameters.
 
 ~~- Proper methods for efficiency calculation, currently this is manual 
 (see `cochlear_example.m`).~~
-- Currently coils are assumed to be coaxially aligned, need to add methods for lateral and angular misalignment.
+- Currently coils are assumed to be coaxially aligned, need to add methods for ~~ lateral ~~ and angular misalignment.
+    → *Added mutualLat for lateral misalignment modelling; more complex than mutualIdeal, therefore slower*
 - For PCB coils, Rs prediction is sensitive to input variables. Ideally need a better approximation.
 - Non-square PCB coils currently use the gap length formula for square 
 coils; this should be updated. Non-critical, since this only affects SRF 
