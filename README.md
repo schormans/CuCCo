@@ -95,7 +95,43 @@ These are the same as for `SolWireCoil.m`, with *din* instead of *l*.
 ### Link Parameter Functions
 
 With coils defined, link parameters can be determined with the 
-following functions
+following functions. The simplest way to characterize a link currently
+is to use `linkcharvsdist.m`. This gives gain, efficiency, and impedance 
+parameters for an inductive link across a range of distances. Alternatively,
+specific parameters can be calculated by using individual functions.
+
+#### `linkcharvsdist.m`
+
+Characterizes a link at a single frequency, over a range of distances.
+This function will output the key performance metrics: gain, efficiency,
+and maximum theoretical efficiency. It will also output the link impedance
+and reflected impedance, as these can be of interest when designing
+transmitter and receiver circuits.
+
+*Inputs*
+- *coil1, coil2*: The input coil objects, can be `SolWireCoil` or 
+`PCBCoil`
+- *dists*: A vector containing coaxial distances between the two coil 
+objects, e.g. `linspace(1e-3,10e-3,100)` for 100 distance points between
+1 mm and 10 mm.
+- *config*: can be 'SS','SP','PS', or 'PP', corresponding to each 
+possible resonant link arrangement.
+- *Zout*: The output load attached to the link.
+- *freq*: Drive frequency in Hz.
+- *C1,C2*: Resonant capacitances, these can be manually supplied to tweak
+the resonance to your liking. The most simple method is to use `coil.C`,
+where `coil` is one of your coil input objects. To improve resonance for
+parallel connected coils `coil.C - coil.CP` allows you to use the parallel
+capacitance of the coil as part of the resonant capacitance.
+
+*Outputs*
+- *gainout*: Link gain, for SP,SS units are V/V, for PS,PP units are V/A.
+This is a complex number, use `abs(gainout)` to get the absolute value.
+- *effout*: Link efficiency.
+- *zlinkout*: Full link impedance as viewed from the input coil.
+- *zreflout*: Reflected impedance into the input coil from the coupled coil.
+- *effmax*: Maximum theoretical link efficiency, given the values of *Q* and *k*.
+
 
 #### `mutualIdeal.m`
 
@@ -148,6 +184,22 @@ possible resonant link arrangement.
 - *gainval*: the gain of the link, either a voltage gain or a 
 transimpedance, depending if the input is a voltage or a current.
 
+#### `linkeff.m`
+
+Determines the link efficiency for a given link arrangement, derived
+from the config, gain, and impedances.
+
+*Inputs*
+- *config*: can be 'SS','SP','PS', or 'PP', corresponding to each 
+possible resonant link arrangement.
+- *linkgain*: link gain, as produced by `gain.m`.
+- *Zlink*: link impedance, as produced by `zlink.m`.
+- *Zout*: connected load impedance.
+
+*Outputs*
+
+- *effout*: Link efficiency.
+
 #### `etamax.m`
 
 Determines the maximum theoretical efficiency of a given link.
@@ -163,8 +215,8 @@ given input parameters.
 ## Features to be Added (TODO)
 
 
-- Proper methods for efficiency calculation, currently this is manual 
-(see `cochlear_example.m`).
+~~- Proper methods for efficiency calculation, currently this is manual 
+(see `cochlear_example.m`).~~
 - Currently coils are assumed to be coaxially aligned, need to add methods for lateral and angular misalignment.
 - For PCB coils, Rs prediction is sensitive to input variables. Ideally need a better approximation.
 - Non-square PCB coils currently use the gap length formula for square 
