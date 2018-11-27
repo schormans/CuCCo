@@ -3,6 +3,9 @@
 CuCCo provides a series of MATLAB scripts that allow for calculation of 2-coil inductive link parameters, based on geometric coil definitions.
 Currently, wirewound solenoid coils and PCB-based spiral coils are supported.
 CuCCo allows seamless geometric → electrical parameter conversion to allow links to be designed without the need for FEM simulations.
+
+Please email any comments, questions, or concerns to: ![email address image](./email-address-image.gif).
+
 ## Current Features
 
 Currently an example file `cochlear_example.m` is provided, which shows 
