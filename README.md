@@ -238,6 +238,10 @@ Determines the maximum theoretical efficiency of a given link.
 - *max_eff*: the maximum theoretical efficiency of the link with the 
 given input parameters.
 
+#### `resonance.m`
+
+Returns peak and trough frequencies in the link impedance function of the given link. Ensure to account for changing frequency when providing the coil impedance values.
+
 ## Features to be Added (TODO)
 
 
